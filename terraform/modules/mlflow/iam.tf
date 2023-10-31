@@ -27,8 +27,8 @@ resource "aws_iam_role" "main" {
 }
 
 resource "aws_iam_role_policy" "main" {
-  prefix = "${var.prefix}-policy"
-  role   = aws_iam_role.main.id
+  name = "${var.prefix}-policy"
+  role = aws_iam_role.main.id
 
   policy = jsonencode({
     Version = "2012-10-17"
