@@ -37,3 +37,23 @@ docker-compose --file local-dev/local-docker-compose.yaml  up
 ```
 
 This method does not store any persistant data, so it is only applicable for local dev/test purposes.
+
+
+## Run training
+
+To run training to the model: 
+1. Export neccesary export envirement variables for the main.py:
+```bash
+export MLFLOW_TRACKING_URI="Change me"
+export MLFLOW_EXPERIMENT_NAME="Change me"
+export MLFLOW_TRACKING_USERNAME="Change me"
+export MLFLOW_TRACKING_PASSWORD="Change me"
+
+export AWS_ACCESS_KEY_ID="Change me"
+export AWS_SECRET_ACCESS_KEY="Change me"
+```
+2. Run main.py:
+```bash
+python main.py
+```
+The experiment will be track by mlflow, the artifact will be upload to S3 bucket.
