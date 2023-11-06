@@ -41,8 +41,8 @@ This method does not store any persistant data, so it is only applicable for loc
 
 ## Run training
 
-To run training to the model: 
-1. Export neccesary export envirement variables for the main.py:
+To run training of the model: 
+1. Export neccesary envirement variables for the train.py:
 ```bash
 export MLFLOW_TRACKING_URI="Change me"
 export MLFLOW_EXPERIMENT_NAME="Change me"
@@ -52,8 +52,8 @@ export MLFLOW_TRACKING_PASSWORD="Change me"
 export AWS_ACCESS_KEY_ID="Change me"
 export AWS_SECRET_ACCESS_KEY="Change me"
 ```
-2. Run main.py:
+2. Run train.py:
 ```bash
-python main.py
+python train.py
 ```
 The experiment will be track by mlflow, the artifact will be upload to S3 bucket.
