@@ -4,18 +4,6 @@ from sklearn.metrics import mean_squared_error
 from data_preprocessing import preprocessing
 import mlflow.sklearn
 from mlflow.models import infer_signature
-import os
-
-#
-os.environ["MLFLOW_TRACKING_URI"] = "Change me"
-os.environ["MLFLOW_EXPERIMENT_NAME"] = "Change me"
-os.environ["MLFLOW_TRACKING_USERNAME"] = "Change me"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "Change me"
-
-# AWS AK/SK are required to upload artifacts to S3 Bucket
-os.environ["AWS_ACCESS_KEY_ID"] = "Change me"
-os.environ["AWS_SECRET_ACCESS_KEY"] = "Change me"
-
 
 # Linear Regression training
 def lr_train(x_train, x_test, y_train, y_test):
