@@ -17,7 +17,7 @@ class InputData(BaseModel):
     room_type_Private_room: int = Field(..., alias='room_type_Private room')
 
 # Load model from MLFlow
-model = mlflow.pyfunc.load_model("models:/{model_name}/{model_tier}".format(model_name=os.environ["MODEL_NAME"], model_tier=os.environ["MODEL_TIER"]))
+model = mlflow.pyfunc.load_model("models:/{model_name}/{model_tier}".format(model_name=os.environ["MODEL_NAME"], model_tier=os.environ["MODEL_NUMBER"]))
 
 @app.post("/predict")
 def predict(input_data: InputData):

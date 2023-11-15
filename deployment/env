@@ -1,5 +1,5 @@
 MODEL_NAME=sk-learn-linear-regression-reg-model
-MODEL_TIER=Production
+MODEL_NUMBER=1
 
 MLFLOW_TRACKING_PASSWORD="change me"
 MLFLOW_TRACKING_USERNAME="change me"
