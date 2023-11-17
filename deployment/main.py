@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 import mlflow.pyfunc
 import pandas as pd
+import numpy as np
 import os
 
 app = FastAPI()
@@ -28,7 +29,7 @@ def predict(input_data: InputData):
     input_df['room_type_Entire home/apt'] = input_df['room_type_Entire home/apt'].astype('int32')
     input_df['room_type_Private room'] = input_df['room_type_Private room'].astype('int32')
 
-    prediction = model.predict(input_df)
+    prediction = np.exp(model.predict(input_df))
     prediction_list = prediction.tolist()
     return {"prediction": prediction_list}
 
