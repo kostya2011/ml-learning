@@ -56,10 +56,15 @@ resource "aws_iam_role_policy" "this" {
           "s3:GetObjectVersion",
         ]
         Resource = [
-          aws_s3_bucket.this.arn,
-          "${aws_s3_bucket.this.arn}/*"
+          var.artifacts_bucket_name,
+          "${var.artifacts_bucket_name}/*"
         ]
       },
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "ecr" {
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
 }

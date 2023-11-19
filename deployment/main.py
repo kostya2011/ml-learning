@@ -34,6 +34,6 @@ def predict(input_data: InputData):
     return {"prediction": prediction_list}
 
 # Healthcheck endpoint needed for app runner service
-@app.post("/health")
+@app.get("/health")
 def health():
      return {"Healthy": True}
