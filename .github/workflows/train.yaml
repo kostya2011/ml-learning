@@ -27,5 +27,6 @@ jobs:
           MLFLOW_EXPERIMENT_NAME: "CI"
         run: |
           pip install -r requirements.txt
+          env
           export MLFLOW_TRACKING_URI=${{ inputs.tracking_url }}
           python3 train.py
