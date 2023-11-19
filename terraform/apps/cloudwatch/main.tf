@@ -4,6 +4,18 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# Comment this out if you don't have access to scalr or wanna run it locally
+terraform {
+  backend "remote" {
+    hostname     = "kostya.scalr.io"
+    organization = "env-v0o4gil5gthrrt0nq"
+
+    workspaces {
+      name = "cloudwatch"
+    }
+  }
+}
+
 resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
   alarm_name          = "monthly-billing-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"

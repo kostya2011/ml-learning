@@ -1,17 +1,18 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+import os
 
+data_url = os.getenv('DATA_URL', 'http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/visualisations/listings.csv')
 
 pd.options.mode.chained_assignment = None
 
 
-def get_data(url='http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/visualisations/listings.csv'):
+def get_data(url):
     raw_df = pd.read_csv(url)
     return raw_df
 
-
-def preprocessing(df=get_data()):
+def preprocessing(df=get_data(data_url)):
     df.reviews_per_month.fillna(0, inplace=True)
 
     df['license_Exempt'] = np.where(df['license'] == "Exempt", 0, 1)

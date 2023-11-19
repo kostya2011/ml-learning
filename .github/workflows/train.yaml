@@ -1,0 +1,31 @@
+name: Train model
+
+on:
+  workflow_dispatch:
+    inputs:
+      data_url:
+        description: "URL to the data to train model"
+        required: true
+        default: "http://data.insideairbnb.com/spain/catalonia/barcelona/2022-09-10/visualisations/listings.csv"
+      tracking_url:
+        description: "URL to the tracking server"
+        required: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Train model
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_PASSWORD }}
+          MLFLOW_TRACKING_USERNAME: "mlflow"
+          MLFLOW_EXPERIMENT_NAME: "CI"
+        run: |
+          pip install -r requirements.txt
+          export MLFLOW_TRACKING_URI=${{ inputs.tracking_url }}
+          python3 train.py

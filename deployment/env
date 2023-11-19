@@ -1,0 +1,9 @@
+MODEL_NAME=sk-learn-linear-regression-reg-model
+MODEL_NUMBER=1
+
+MLFLOW_TRACKING_PASSWORD="change me"
+MLFLOW_TRACKING_USERNAME="change me"
+MLFLOW_TRACKING_URI="change me"
+
+AWS_SECRET_ACCESS_KEY="change me"
+AWS_ACCESS_KEY_ID="change me"

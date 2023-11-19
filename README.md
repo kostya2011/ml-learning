@@ -20,6 +20,12 @@ Deploys MLFLOW tracking UI to AWS cloud. Dependencies:
 
 This will create RDS instance, s3 bucket and App Runner serivce from Mlflow image with public endpoint (with basic-auth)
 
+### Scalr
+Scalr is a remote operations backend for Terraform and OpenTofu (OTF). Scalr executes runs and stores state centrally allowing for easy collaboration across your organization.
+
+Deployment of mlflow via Scalr
+![Alt text](./img/scalr.png)
+
 ### Optional
 You can create billing alarm for AWS via next steps:
 ```bash
@@ -57,3 +63,24 @@ export AWS_SECRET_ACCESS_KEY="Change me"
 python train.py
 ```
 The experiment will be track by mlflow, the artifact will be upload to S3 bucket.
+
+## Deployment
+### Locally
+1. Enter needed env variables for running model (via deployment/env file)
+2. Go to deployment folder:
+```bash
+> cd deployment
+```
+3. Run docker build:
+```bash
+> docker build -f Dockerfile -t model .
+```
+3. Run docker container:
+```bash
+docker run -it --rm -p 5001:80 --env-file env  model
+```
+
+This will serve the model via FastAPI. To trigger predict endpoint go to localhost:5001/docs and run request to /predict endpoint via OpenAPI UI.
+
+![Alt text](./img/predict_p1.png)
+![Alt text](./img/predict_p2.png)

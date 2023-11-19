@@ -1,4 +1,4 @@
-resource "aws_iam_role" "main" {
+resource "aws_iam_role" "this" {
   name = "${var.prefix}-role"
 
   assume_role_policy = jsonencode({
@@ -26,9 +26,9 @@ resource "aws_iam_role" "main" {
   }
 }
 
-resource "aws_iam_role_policy" "main" {
+resource "aws_iam_role_policy" "this" {
   name = "${var.prefix}-policy"
-  role = aws_iam_role.main.id
+  role = aws_iam_role.this.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -56,10 +56,15 @@ resource "aws_iam_role_policy" "main" {
           "s3:GetObjectVersion",
         ]
         Resource = [
-          aws_s3_bucket.main.arn,
-          "${aws_s3_bucket.main.arn}/*"
+          var.artifacts_bucket_name,
+          "${var.artifacts_bucket_name}/*"
         ]
       },
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "ecr" {
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
 }
