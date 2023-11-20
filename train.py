@@ -1,6 +1,8 @@
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
+from mlflow.models import infer_signature
 from sklearn.model_selection import GridSearchCV
 from data_preprocessing import preprocessing
 import mlflow.sklearn
@@ -16,6 +18,39 @@ def model_evaluate(model, test_features, test_labels):
     accuracy = 100 - mape
 
     return accuracy, rmse
+
+
+
+# Linear Regression training
+def lr_train(x_train, x_test, y_train, y_test):
+    # mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    mlflow.sklearn.autolog(disable=True)
+    with mlflow.start_run(run_name='lr_baseline'):
+        params = {
+            "copy_X": True,
+            "fit_intercept": True,
+            "n_jobs": None,
+            "positive": False
+        }
+        model = LinearRegression()
+        model.fit(x_train, y_train)
+
+        y_pred = model.predict(x_test)
+        rmse = mean_squared_error(y_test, y_pred, squared=False)
+
+        signature = infer_signature(x_test, y_pred)
+
+        mlflow.set_tag("model_name", "LinearRegression")
+        mlflow.log_params(params)
+        mlflow.log_metric("RMSE", rmse)
+        mlflow.sklearn.log_model(
+            sk_model=model,
+            artifact_path="sklearn-model",
+            signature=signature,
+            registered_model_name="sk-learn-linear-regression-reg-model",
+        )
+
+    return model
 
 
 '''Random Forest Regressor training'''
@@ -56,7 +91,8 @@ def rfr_train(x_train, x_test, y_train, y_test):
 
 if __name__ == "__main__":
     x_train, x_test, y_train, y_test = preprocessing()
-    rfr_train(x_train, x_test, y_train, y_test)
+    lr_train(x_train, x_test, y_train, y_test)
+    # rfr_train(x_train, x_test, y_train, y_test)
 
 
 
