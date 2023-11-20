@@ -57,7 +57,7 @@ def rfr_train(x_train, x_test, y_train, y_test):
         mlflow.log_metric("RMSE", grid_rmse)
         mlflow.log_metric("Accuracy", grid_accuracy)
         mlflow.sklearn.log_model(
-            sk_model=rfr,
+            sk_model=best_model,
             artifact_path="sklearn-model",
             registered_model_name="sk-learn-random-forest-regressor-reg-model",
         )
