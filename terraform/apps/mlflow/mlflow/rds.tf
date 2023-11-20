@@ -1,4 +1,4 @@
-resource "random_password" "main" {
+resource "random_password" "this" {
   length  = 16
   special = true
 
@@ -11,7 +11,7 @@ resource "random_password" "main" {
 }
 
 
-resource "aws_db_instance" "main" {
+resource "aws_db_instance" "this" {
   identifier = "${var.prefix}-rds-psql"
 
   allocated_storage    = var.allocated_storage
@@ -22,11 +22,11 @@ resource "aws_db_instance" "main" {
   parameter_group_name = var.parameter_group_name
   publicly_accessible  = var.publicly_accessible
 
-  vpc_security_group_ids = [aws_security_group.main.id]
+  vpc_security_group_ids = [aws_security_group.this.id]
 
   db_name  = "mlflow"
   username = "mlflow"
-  password = random_password.main.result
+  password = random_password.this.result
 
   skip_final_snapshot     = true
   backup_retention_period = 1

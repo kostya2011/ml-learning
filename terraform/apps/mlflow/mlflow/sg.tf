@@ -2,10 +2,10 @@ data "aws_vpc" "default" {
   default = true
 }
 
-resource "aws_security_group" "main" {
+resource "aws_security_group" "this" {
   vpc_id      = data.aws_vpc.default.id
   name        = "${var.prefix}-sg"
-  description = "Main sg for mlflow tracking UI resources"
+  description = "Sg for mlflow tracking UI resources"
 
   ingress {
     from_port   = 5432

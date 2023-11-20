@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "main" {
+resource "aws_s3_bucket" "this" {
   bucket = "${var.prefix}-artifacts-store"
 
   # Drop bucket with all content on destroy

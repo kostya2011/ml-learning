@@ -1,3 +1,7 @@
+locals {
+  mlflow_user = "mlflow"
+}
+
 variable "prefix" {
   description = "Prefix for AWS created resources."
   type        = string
