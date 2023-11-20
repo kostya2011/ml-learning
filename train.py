@@ -6,17 +6,6 @@ from data_preprocessing import preprocessing
 import mlflow.sklearn
 import os
 
-#
-os.environ["MLFLOW_TRACKING_URI"] = "Change me"
-os.environ["MLFLOW_EXPERIMENT_NAME"] = "Change me"
-os.environ["MLFLOW_TRACKING_USERNAME"] = "Change me"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "Change me"
-
-# AWS AK/SK are required to upload artifacts to S3 Bucket
-os.environ["AWS_ACCESS_KEY_ID"] = "Change me"
-os.environ["AWS_SECRET_ACCESS_KEY"] = "Change me"
-
-
 def model_evaluate(model, test_features, test_labels):
     predictions = model.predict(test_features)
     error = mean_absolute_error(predictions, test_labels)

@@ -34,7 +34,7 @@ variable "artifacts_bucket_name" {
 
 variable "model_name" {
   type    = string
-  default = "sk-learn-linear-regression-reg-model"
+  default = "sk-learn-random-forest-regressor-reg-model"
 }
 
 variable "model_version_number" {
