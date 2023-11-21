@@ -1,6 +1,10 @@
 # MlOPS learning project
 Collection of readmes regarding used tools.
 
+# Diagram
+
+![alt text](./img/MLOps_lab2.drawio.png)
+
 ## Mlflow tracking UI
 Deploys MLFLOW tracking UI to AWS cloud. Dependencies:
 - AWS App Runner to host tracking UI
